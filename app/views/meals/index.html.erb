@@ -1,0 +1,21 @@
+<h1>Listing environmentally concious meals</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th></th>
+  </tr>
+
+  <% @meals.each do |meal| %>
+
+    <tr>
+      <td><%= meal.title %></td>
+      <td><%= meal.text %></td>
+      <td><%= link_to 'Show', meal_path(meal) %></td>
+    </tr>
+  
+  <% end %>
+</table>
+
+<p> Successful Meals: <%= @count %> </p>

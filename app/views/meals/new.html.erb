@@ -1,0 +1,21 @@
+<h1> New Eco-Concious Meal </h1>
+<%= link_to 'List', meals_path %>
+<%= form_with scope: :meal, url: meals_path, local: true do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+<!-- time, location, meal contents, meal notes/observations  -->
+  <p>
+    <%= form.label :text %><br>
+    <%= form.text_area :text %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+  <p></p>
+  <%= link_to 'Back', controller: 'home_screen' %>
+
+<% end %>

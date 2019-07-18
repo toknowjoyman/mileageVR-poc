@@ -1,0 +1,101 @@
+<head>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body>
+  <h1>VegRising POC</h1>
+<p></p>
+
+<%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
+<p>Succesful Meals Ratio:</p>
+<p>Carbon Emissions Saved:</p>
+<p>Community Impact:</p>
+<p>
+
+  <!-- Features -->
+  <form method="" action="meals/new">
+
+    <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
+    Track Meal </button>
+
+  </form>
+
+  <form method="get" action="FindRestaurants">
+
+    <button id ="find rests"class="btn btn-primary" name="addEntry" value="Submit" />
+    Restaurants </button>
+
+  </form>
+
+  <form method="post" action="QrCode">
+
+    <button id ="Scan QR Code"class="btn btn-primary" name="addEntry" value="Submit" />
+    Scan QR </button>
+
+  </form>
+
+  <form method="get" action="Lifestyle">
+
+    <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
+    Lifestyle </button>
+
+  </form>
+</p>
+
+
+<!-- this is for side scroll game display  -->
+<canvas id="myCanvas" width="320" height="240"></canvas>
+
+
+
+<% if @count = 0 %>
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+
+
+
+// # topsoil
+ctx.beginPath();
+ctx.rect(0, 220, 320, 10);
+ctx.fillStyle = "gold";
+ctx.fill();
+// # ground beneath
+ctx.beginPath();
+ctx.rect(0, 230, 320, 10);
+ctx.fillStyle = "gold";
+ctx.fill();
+</script>
+<% end %>
+<% if @count = 2 %>
+  <script>
+// # single blade of grass
+  ctx.beginPath();
+  ctx.rect(10, 215, 5, 15);
+  ctx.fillStyle = "green";
+  ctx.fill();
+
+// # double blade of grass
+  ctx.beginPath();
+  ctx.rect(20, 210, 5, 20);
+  ctx.fillStyle = "green";
+  ctx.fill();
+
+ctx.rect(25, 215, 5, 15);
+ctx.fillStyle = "green";
+ctx.fill();
+
+// sapling
+ctx.rect(40, 200, 5, 30);
+ctx.fillStyle = "green";
+ctx.fill();
+ctx.rect(32, 205, 20, 2);
+ctx.fillStyle = "green";
+ctx.fill();
+
+
+</script>
+<% end %>
+
+<p> count </p>
+Successful Meals: <%= @count %>
