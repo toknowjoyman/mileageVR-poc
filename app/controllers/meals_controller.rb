@@ -35,7 +35,7 @@ class MealsController < ApplicationController
   end
 
   def destroy
-    @meal = Article.find(params[:id])
+    @meal = Meal.find(params[:id])
     @meal.destroy
 
     redirect_to meals_path
