@@ -14,13 +14,20 @@
 // #   @.fillStyle = "blue"
 // #   @.fill()
 
-
+// alert(gon.count)
 
 // # ctx.putPoint(100, 100)
-var c = document.getElementById("myCanvas");
+function draw() {
+  var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
 ctx.beginPath();
 ctx.rect(0, 0, 5, 15);
 ctx.fillStyle = "blue";
 ctx.fill();
+}
+window.onload = draw();
+
+document.addEventListener("turbolinks:load", function() {
+  $("mycanvas").draw();
+})

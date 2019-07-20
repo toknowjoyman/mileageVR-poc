@@ -1,101 +1,189 @@
+<!DOCTYPE html>
+<html>
+
 <head>
   <%= javascript_include_tag 'application' %>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8">
+  // alert(gon.firstDay)
+  </script>
 </head>
+
 <body>
+
   <h1>VegRising POC</h1>
-<p></p>
+  <p></p>
 
-<%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
-<p>Succesful Meals Ratio:</p>
-<p>Carbon Emissions Saved:</p>
-<p>Community Impact:</p>
-<p>
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
+  <p>
 
-  <!-- Features -->
-  <form method="" action="meals/new">
+    <!-- GAME DISPLAY  -->
+    <canvas id="myCanvas" width="320" height="240"></canvas></p>
 
-    <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
-    Track Meal </button>
+    <!-- DASHBOARD -->
+    <p>Succesful Meals Ratio:</p>
+    <p>Carbon Emissions Saved:</p>
+    <p>Community Impact:</p>
+    <p>
 
-  </form>
+      <!-- Features -->
+      <form method="" action="meals/new">
 
-  <form method="get" action="FindRestaurants">
+        <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
+        Track Meal </button>
 
-    <button id ="find rests"class="btn btn-primary" name="addEntry" value="Submit" />
-    Restaurants </button>
+      </form>
 
-  </form>
+      <form method="get" action="FindRestaurants">
 
-  <form method="post" action="QrCode">
+        <button id ="find rests"class="btn btn-primary" name="addEntry" value="Submit" />
+        Restaurants </button>
 
-    <button id ="Scan QR Code"class="btn btn-primary" name="addEntry" value="Submit" />
-    Scan QR </button>
+      </form>
 
-  </form>
+      <form method="post" action="QrCode">
 
-  <form method="get" action="Lifestyle">
+        <button id ="Scan QR Code"class="btn btn-primary" name="addEntry" value="Submit" />
+        Scan QR </button>
 
-    <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
-    Lifestyle </button>
+      </form>
 
-  </form>
-</p>
+      <form method="get" action="Lifestyle">
 
+        <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
+        Lifestyle </button>
 
-<!-- this is for side scroll game display  -->
-<canvas id="myCanvas" width="320" height="240"></canvas>
+      </form>
+    </p>
 
+    <script>
 
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    drawScene();
+    function drawScene(){
 
-<% if @count = 0 %>
-<script>
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
+      drawSoil();
+      drawGround();
 
+      switch (gon.count){
+        case 1: drawGrassSingle(20);
+        case 2: drawGrassDouble(40);
+        case 3: drawSapling(60);
+        case 4: drawPlant(80);
+        case 5: drawTree(100);
+        case 6: drawGrassSingle(20);
+        drawGrassDouble(50);
+        drawSapling(80);
+        drawPlant(120);
+        drawTree(160);
+        break;
+        case 7: drawGrassDouble(20);
+        drawGrassDouble(50);
+        drawSapling(80);
+        drawPlant(120);
+        drawTree(160);
+        case 8: drawGrassDouble(20);
+        drawSapling(50);
+        drawPlant(80);
+        drawTree(120);
+        drawTree(160);
+        case 9: drawSapling(20);
+      }
+    }
 
+    //params to add: days, meals
+    function drawSoil() {
+      // # topsoil
+      ctx.beginPath();
+      ctx.rect(0, 220, 320, 10);
+      ctx.fillStyle = "gold";
+      ctx.fill();
+    }
 
+    function drawGround(){
+      // # ground beneath topsoil
+      ctx.beginPath();
+      ctx.rect(0, 230, 320, 10);
+      ctx.fillStyle = "gold";
+      ctx.fill();
+    }
+    function drawGrassSingle(xPos) {
+      // # single blade of grass
+      ctx.beginPath();
+      ctx.rect(xPos, 215, 5, 15);
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
+    function drawGrassDouble(xPos) {
+      // # double blade of grass
+      ctx.beginPath();
+      ctx.rect(xPos, 210, 5, 20);
+      ctx.fillStyle = "green";
+      ctx.fill();
 
-// # topsoil
-ctx.beginPath();
-ctx.rect(0, 220, 320, 10);
-ctx.fillStyle = "gold";
-ctx.fill();
-// # ground beneath
-ctx.beginPath();
-ctx.rect(0, 230, 320, 10);
-ctx.fillStyle = "gold";
-ctx.fill();
-</script>
-<% end %>
-<% if @count = 2 %>
-  <script>
-// # single blade of grass
-  ctx.beginPath();
-  ctx.rect(10, 215, 5, 15);
-  ctx.fillStyle = "green";
-  ctx.fill();
+      ctx.rect(xPos+5, 215, 5, 15);
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
+    function drawSapling(xPos) {
+      // sapling
+      ctx.beginPath();
+      ctx.rect(xPos, 200, 5, 30);//stem
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.rect(xPos-8, 205, 20, 2);//leaf
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
 
-// # double blade of grass
-  ctx.beginPath();
-  ctx.rect(20, 210, 5, 20);
-  ctx.fillStyle = "green";
-  ctx.fill();
+    function drawPlant(xPos) {
+      // sapling
+      ctx.beginPath();
+      ctx.rect(xPos, 180, 5, 50);//stem
+      ctx.fillStyle = "brown";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.rect(xPos-13, 205, 30, 3);//first leaves
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.rect(xPos-18, 183, 40, 5);//second leaves
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
 
-ctx.rect(25, 215, 5, 15);
-ctx.fillStyle = "green";
-ctx.fill();
+    function drawTree(xPos) {
+      // sapling
+      ctx.beginPath();
+      ctx.rect(xPos, 130, 10, 100);//stem
+      ctx.fillStyle = "brown";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.rect(xPos-13, 150, 40, 5);//first leaves
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.rect(xPos-18, 140, 50, 7);//second leaves
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.rect(xPos-13, 130, 40, 5);//top branch
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
 
-// sapling
-ctx.rect(40, 200, 5, 30);
-ctx.fillStyle = "green";
-ctx.fill();
-ctx.rect(32, 205, 20, 2);
-ctx.fillStyle = "green";
-ctx.fill();
+    function drawCanopy() {
+      // sapling
+      ctx.rect(40, 200, 5, 30);
+      ctx.fillStyle = "green";
+      ctx.fill();
 
+      ctx.rect(32, 205, 20, 2);
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
+    </script>
 
-</script>
-<% end %>
-
-<p> count </p>
-Successful Meals: <%= @count %>
+  </body>
+  </html>

@@ -10,6 +10,11 @@ class MealsController < ApplicationController
   end
 
   def new
+    @meal= Meal.new
+  end
+
+  def edit
+    @meal = Meal.find(params[:id])
   end
 
   def create
@@ -17,6 +22,23 @@ class MealsController < ApplicationController
 
     @meal.save
     redirect_to @meal
+  end
+
+  def update
+    @meal = Meal.find(params[:id])
+
+    if @meal.update(meal_params)
+      redirect_to @meal
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @meal = Article.find(params[:id])
+    @meal.destroy
+
+    redirect_to meals_path
   end
 
   private
