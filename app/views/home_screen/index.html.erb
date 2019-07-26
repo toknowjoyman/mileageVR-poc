@@ -7,7 +7,7 @@
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
   <script type="text/javascript" charset="utf-8">
-  alert(gon.created_at)
+  // alert(gon.meals[1].created_at)
   </script>
 </head>
 
@@ -21,208 +21,392 @@
   <h1>VegRising POC</h1>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
-   -->
+-->
 
 
-  <!-- DASHBOARD -->
-  <p>Succesful Meals Ratio:</p>
-  <p>Carbon Emissions Saved:</p>
-  <p>Community Impact:</p>
+<!-- DASHBOARD -->
+<p>Succesful Meals Ratio:</p>
+<p>Carbon Emissions Saved:</p>
+<p>Community Impact:</p>
 
 
-  <!-- Features -->
-  <div>
-    <form method="" action="meals/new">
+<!-- Features -->
+<div>
+  <form method="" action="meals/new">
 
-      <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
-      Track Meal </button>
+    <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
+    Track Meal </button>
 
-    </form>
-
-
-    <form method="post" action="QrCode">
-
-      <button id ="Scan QR Code"class="btn btn-primary" name="addEntry" value="Submit" />
-      Scan QR </button>
-
-    </form>
-
-  </div>
+  </form>
 
 
-  <script>
+  <form method="post" action="QrCode">
 
-  (function() {
-    var display = document.getElementById('gameDisplay');
-    var canvas = document.getElementById('scrollableGame'),
-    context = canvas.getContext('2d');
-    var dragging = false;
-    var lastX;
-    var marginLeft = 0;
+    <button id ="Scan QR Code"class="btn btn-primary" name="addEntry" value="Submit" />
+    Scan QR </button>
+
+  </form>
+
+</div>
 
 
-    canvas.addEventListener('mousedown', function(e) {
-      var evt = e || event;
-      dragging = true;
+<script>
+
+(function() {
+  var display = document.getElementById('gameDisplay');
+  var canvas = document.getElementById('scrollableGame'),
+  context = canvas.getContext('2d');
+  var dragging = false;
+  var lastX;
+  var marginLeft = 0;
+
+
+  canvas.addEventListener('mousedown', function(e) {
+    var evt = e || event;
+    dragging = true;
+    lastX = evt.clientX;
+    e.preventDefault();
+  }, false);
+
+  window.addEventListener('mousemove', function(e) {
+    var evt = e || event;
+    if (dragging) {
+      var delta = evt.clientX - lastX;
       lastX = evt.clientX;
-      e.preventDefault();
-    }, false);
+      marginLeft += delta;
+      canvas.style.marginLeft = marginLeft + "px";
+    }
+    e.preventDefault();
+  }, false);
 
-    window.addEventListener('mousemove', function(e) {
-      var evt = e || event;
-      if (dragging) {
-        var delta = evt.clientX - lastX;
-        lastX = evt.clientX;
-        marginLeft += delta;
-        canvas.style.marginLeft = marginLeft + "px";
+  window.addEventListener('mouseup', function() {
+    dragging = false;
+  }, false);
+
+
+
+  // resize the canvas to fill browser window dynamically
+  window.addEventListener('resize', resizeCanvas, false);
+
+  function resizeCanvas() {
+    display.width = window.innerWidth;
+    display.height = window.innerHeight/3;
+
+    canvas.height = window.innerHeight/3;
+
+    drawScene();
+  }
+  resizeCanvas();
+
+  function drawSoil() {
+    // # topsoil
+    context.beginPath();
+    context.rect(0, 220, 3840, 10);
+    context.fillStyle = "gold";
+    context.fill();
+  }
+
+  function drawGround(){
+    // # ground beneath topsoil
+    context.beginPath();
+    context.rect(0, 230, 3200, 10);
+    context.fillStyle = "gold";
+    context.fill();
+  }
+  function drawGrassSingle(xPos) {
+    // # single blade of grass
+    context.beginPath();
+    context.rect(xPos, 215, 5, 15);
+    context.fillStyle = "green";
+    context.fill();
+  }
+  function drawGrassDouble(xPos) {
+    // # double blade of grass
+    context.beginPath();
+    context.rect(xPos, 210, 5, 20);
+    context.fillStyle = "green";
+    context.fill();
+
+    context.rect(xPos+5, 215, 5, 15);
+    context.fillStyle = "green";
+    context.fill();
+  }
+  function drawSapling(xPos) {
+    // sapling
+    context.beginPath();
+    context.rect(xPos, 200, 5, 30);//stem
+    context.fillStyle = "green";
+    context.fill();
+    context.rect(xPos-8, 205, 20, 2);//leaf
+    context.fillStyle = "green";
+    context.fill();
+  }
+
+  function drawPlant(xPos) {
+    // sapling
+    context.beginPath();
+    context.rect(xPos, 180, 5, 50);//stem
+    context.fillStyle = "brown";
+    context.fill();
+    context.beginPath();
+    context.rect(xPos-13, 205, 30, 3);//first leaves
+    context.fillStyle = "green";
+    context.fill();
+    context.rect(xPos-18, 183, 40, 5);//second leaves
+    context.fillStyle = "green";
+    context.fill();
+  }
+
+  function drawTree(xPos) {
+    // sapling
+    context.beginPath();
+    context.rect(xPos, 130, 10, 100);//stem
+    context.fillStyle = "brown";
+    context.fill();
+    context.beginPath();
+    context.rect(xPos-13, 150, 40, 5);//first leaves
+    context.fillStyle = "green";
+    context.fill();
+    context.rect(xPos-18, 140, 50, 7);//second leaves
+    context.fillStyle = "green";
+    context.fill();
+    context.beginPath();
+    context.rect(xPos-13, 130, 40, 5);//top branch
+    context.fillStyle = "green";
+    context.fill();
+  }
+
+  function drawCanopy() {
+    // sapling
+    context.rect(40, 200, 5, 30);
+    context.fillStyle = "green";
+    context.fill();
+
+    context.rect(32, 205, 20, 2);
+    context.fillStyle = "green";
+    context.fill();
+  }
+
+  function drawPlantBasedOnAge(mealMonth, mealDate, xPos){
+    var today = new Date();
+    var todaysMonth = (today.getMonth()+1).toString(),
+    todaysDate = today.getDate().toString();
+    var monthsSince = todaysMonth - mealMonth,
+        daysSince = todaysDate - mealDate,
+        AbsoluteDaysSinceMeal = monthsSince * 28 + daysSince; //AbsoluteDaysSinceMeal is configured to 28 days instead of 30/31, to test/play.
+
+    // alert(mm, dd);
+    switch (AbsoluteDaysSinceMeal){
+
+      case 1:
+      // return
+      drawGrassSingle(xPos);
+      break;
+      case 2:
+      // return
+      drawGrassDouble(xPos);
+      break;
+      case 3:
+      // return
+      drawSapling(xPos);
+      break;
+      case 4:
+      // return
+      drawSapling(xPos);
+      break;
+
+      case 5:
+      // return
+      drawPlant(xPos);
+      break;
+      case 6:
+      // return
+      drawPlant(xPos);
+      break;
+      case 7:
+      // return
+      drawPlant(xPos);
+      break;
+
+      case 8:
+      // return
+      drawTree(xPos);
+      break;
+      case 13:
+      // return
+      drawTree(xPos);
+      break;
+
+      default:
+      drawTree(xPos);
+    }
+  }
+
+    function plantingOnFibonacciMeals(){
+
+      for (const [i, meal] of gon.meals.entries()) {
+        // alert(meal.created_at[5]+meal.created_at[6]+meal.created_at[8]+meal.created_at[9]);
+        // for (var plants = 0; plants<=i; plants++){
+        // }
+
+        // alert
+        var mealsCount = i+1;
+        var xPos = mealsCount*20;
+        // getting string representation of gon var for date/time of meal
+        var mm = meal.created_at[5]+meal.created_at[6], dd = meal.created_at[8]+meal.created_at[9];
+
+        switch (mealsCount){
+          // if the meal is fibonacci count
+          // draw a plant
+          case 1:
+          drawPlantBasedOnAge(mm, dd,xPos);
+          break;
+
+          // x location of plant is based on count
+          case 2:
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          drawPlantBasedOnAge(mm, dd,xPos);
+          break;
+
+          case 3:
+          case 4:
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
+          drawPlantBasedOnAge(mm, dd,xPos);
+          break;
+
+
+          case 5:
+          case 6:
+          case 7:
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
+          drawPlantBasedOnAge(mm, dd, xPos);
+
+          break;
+
+          case 8:
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 100);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
+          drawPlantBasedOnAge(mm, dd, xPos);
+
+          // break;
+          // case 9:
+          // case 10:
+          // case 11:
+          // case 12:
+          // case 13:
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 100);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 160);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 180);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 200);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 220);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 240);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 260);
+          //
+          // break;
+          //
+          // case 21:
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 100);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 160);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 180);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 200);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 220);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 240);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 260);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 280);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 300);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+          // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
+
+          // break;
+          // case 34:
+          //
+          // break;
+          // case 55:
+          //
+          // break;
+          // case 89:
+          //
+          // break;
+          // case 144:
+          //
+          // break;
+          // case 192:
+          //
+          // break;
+
+
+        }
       }
-      e.preventDefault();
-    }, false);
-
-    window.addEventListener('mouseup', function() {
-      dragging = false;
-    }, false);
-
-
-
-    // resize the canvas to fill browser window dynamically
-    window.addEventListener('resize', resizeCanvas, false);
-
-    function resizeCanvas() {
-      display.width = window.innerWidth;
-      display.height = window.innerHeight/3;
-
-      canvas.height = window.innerHeight/3;
-
-      drawScene();
-    }
-    resizeCanvas();
-
-    function drawSoil() {
-      // # topsoil
-      context.beginPath();
-      context.rect(0, 220, 3840, 10);
-      context.fillStyle = "gold";
-      context.fill();
     }
 
-    function drawGround(){
-      // # ground beneath topsoil
-      context.beginPath();
-      context.rect(0, 230, 3200, 10);
-      context.fillStyle = "gold";
-      context.fill();
-    }
-    function drawGrassSingle(xPos) {
-      // # single blade of grass
-      context.beginPath();
-      context.rect(xPos, 215, 5, 15);
-      context.fillStyle = "green";
-      context.fill();
-    }
-    function drawGrassDouble(xPos) {
-      // # double blade of grass
-      context.beginPath();
-      context.rect(xPos, 210, 5, 20);
-      context.fillStyle = "green";
-      context.fill();
 
-      context.rect(xPos+5, 215, 5, 15);
-      context.fillStyle = "green";
-      context.fill();
-    }
-    function drawSapling(xPos) {
-      // sapling
-      context.beginPath();
-      context.rect(xPos, 200, 5, 30);//stem
-      context.fillStyle = "green";
-      context.fill();
-      context.rect(xPos-8, 205, 20, 2);//leaf
-      context.fillStyle = "green";
-      context.fill();
-    }
 
-    function drawPlant(xPos) {
-      // sapling
-      context.beginPath();
-      context.rect(xPos, 180, 5, 50);//stem
-      context.fillStyle = "brown";
-      context.fill();
-      context.beginPath();
-      context.rect(xPos-13, 205, 30, 3);//first leaves
-      context.fillStyle = "green";
-      context.fill();
-      context.rect(xPos-18, 183, 40, 5);//second leaves
-      context.fillStyle = "green";
-      context.fill();
-    }
 
-    function drawTree(xPos) {
-      // sapling
-      context.beginPath();
-      context.rect(xPos, 130, 10, 100);//stem
-      context.fillStyle = "brown";
-      context.fill();
-      context.beginPath();
-      context.rect(xPos-13, 150, 40, 5);//first leaves
-      context.fillStyle = "green";
-      context.fill();
-      context.rect(xPos-18, 140, 50, 7);//second leaves
-      context.fillStyle = "green";
-      context.fill();
-      context.beginPath();
-      context.rect(xPos-13, 130, 40, 5);//top branch
-      context.fillStyle = "green";
-      context.fill();
-    }
 
-    function drawCanopy() {
-      // sapling
-      context.rect(40, 200, 5, 30);
-      context.fillStyle = "green";
-      context.fill();
-
-      context.rect(32, 205, 20, 2);
-      context.fillStyle = "green";
-      context.fill();
-    }
 
     function drawScene() {
 
       drawSoil();
       drawGround();
 
-      switch (gon.count){
-        case 1: drawGrassSingle(20);
-        break;
-        case 2: drawGrassDouble(40);
-        break;
-        case 3: drawSapling(60);
-        break;
-        case 4: drawPlant(80);
-        break;
-        case 5: drawTree(100);
-        break;
-        case 6: drawGrassSingle(20);
-        drawGrassDouble(50);
-        drawSapling(80);
-        drawPlant(120);
-        drawTree(160);
-        break;
-        case 7: drawGrassDouble(20);
-        drawGrassDouble(50);
-        drawSapling(80);
-        drawPlant(120);
-        drawTree(160);
-        break;
-        case 8: drawGrassDouble(20);
-        drawSapling(50);
-        drawPlant(80);
-        drawTree(120);
-        drawTree(160);
-        case 9: drawSapling(20);
-        break;
-      }
+      plantingOnFibonacciMeals();
+
+      // switch (gon.count){
+      //   case 1: drawGrassSingle(20);
+      //   break;
+      //   case 2: drawGrassDouble(40);
+      //   break;
+      //   case 3: drawSapling(60);
+      //   break;
+      //   case 4: drawPlant(80);
+      //   break;
+      //   case 5: drawTree(100);
+      //   break;
+      //   case 6: drawGrassSingle(20);
+      //   drawGrassDouble(50);
+      //   drawSapling(80);
+      //   drawPlant(120);
+      //   drawTree(160);
+      //   break;
+      //   case 7: drawGrassDouble(20);
+      //   drawGrassDouble(50);
+      //   drawSapling(80);
+      //   drawPlant(120);
+      //   drawTree(160);
+      //   break;
+      //   case 8: drawGrassDouble(20);
+      //   drawSapling(50);
+      //   drawPlant(80);
+      //   drawTree(120);
+      //   drawTree(160);
+      //   case 9: drawSapling(20);
+      //   break;
+      // }
     }
 
     //params to add: days, meals
@@ -362,5 +546,5 @@
   // }
   // </script>
 
-</body>
-</html>
+  </body>
+  </html>

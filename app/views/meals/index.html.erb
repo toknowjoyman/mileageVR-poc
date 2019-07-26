@@ -12,7 +12,7 @@
   <% @meals.each do |meal| %>
 
   <tr>
-    <td><%= meal.created_at %></td>
+    <td><%= meal.created_at.strftime("%b %d, %H:%M ")%></td>
     <td><%= link_to meal.title, meal_path(meal) %></td>
     <td><%= meal.text %></td>
     <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
