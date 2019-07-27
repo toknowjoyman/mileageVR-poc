@@ -1,6 +1,5 @@
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
   <%= javascript_include_tag 'application' %>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
@@ -108,7 +107,7 @@
   function drawSoil() {
     // # topsoil
     context.beginPath();
-    context.rect(0, 220, 3840, 10);
+    context.rect(0, 220, canvas.width, 10);
     context.fillStyle = "gold";
     context.fill();
   }
@@ -116,7 +115,7 @@
   function drawGround(){
     // # ground beneath topsoil
     context.beginPath();
-    context.rect(0, 230, 3200, 10);
+    context.rect(0, 230, canvas.width, 10);
     context.fillStyle = "gold";
     context.fill();
   }
