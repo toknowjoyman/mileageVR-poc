@@ -14,13 +14,13 @@
   <!-- GAME DISPLAY  -->
   <!-- <div id="gameDisplay" > style="overflow: hidden"-->
 
-    <canvas id="scrollableGame" height="window.innerheight" width="window.innerWidth"></canvas> <!-- width="3840px" -->
+  <canvas id="scrollableGame" height="window.innerheight" width="window.innerWidth"></canvas> <!-- width="3840px" -->
 
   <!-- </div> -->
   <!--
   <h1>VegRising POC</h1>
 -->
-<!-- <%= link_to "Sign up now!", signup_path, class: "btn btn-default btn-lg" %> -->
+<!-- <%= link_to "new!", new_meal_path, class:"btn btn-success"%> -->
 
 
 <!-- DASHBOARD -->
@@ -30,6 +30,7 @@
 
 
 <!-- <a href="#" class="btn btn-lg btn-primary">Sign up now!</a> -->
+
 
 <!-- Features -->
 
@@ -45,7 +46,7 @@
 
   </form>
 
-  <form method="" action="meals/new">
+  <form method="get" action="/meals/new">
     <button id ="add meal"class="btn btn-success" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="right" name="addEntry" value="Submit" />
     Track Meal </button>
 
@@ -208,15 +209,15 @@
 
   function drawPlantBasedOnAge(mealMonth, mealDate, xPos){
     var today = new Date();
-    var todaysMonth = (today.getMonth()+1).toString(),
-    todaysDate = today.getDate().toString();
+    var todaysMonth = (today.getUTCMonth()+1).toString(),
+    todaysDate = today.getUTCDate().toString();
     var monthsSince = todaysMonth - mealMonth,
     daysSince = todaysDate - mealDate,
     AbsoluteDaysSinceMeal = monthsSince * 28 + daysSince; //AbsoluteDaysSinceMeal is configured to 28 days instead of 30/31, to test/play.
 
-    // alert(mm, dd);
+    // alert(AbsoluteDaysSinceMeal);
     switch (AbsoluteDaysSinceMeal){
-
+      case 0:
       case 1:
       // return
       drawGrassSingle(xPos);
@@ -262,7 +263,7 @@
   }
 
   function plantingOnFibonacciMeals(){
-
+    var xPos = canvas.width/10;
     for (const [i, meal] of gon.meals.entries()) {
       // alert(meal.created_at[5]+meal.created_at[6]+meal.created_at[8]+meal.created_at[9]);
       // for (var plants = 0; plants<=i; plants++){
@@ -270,43 +271,51 @@
 
       // alert
       var mealsCount = i+1;
-      var xPos = mealsCount*20;
+      // alert(mealsCount)
+
       // getting string representation of gon var for date/time of meal
       var mm = meal.created_at[5]+meal.created_at[6], dd = meal.created_at[8]+meal.created_at[9];
 
       switch (mealsCount){
         // if the meal is fibonacci count
         // draw a plant
+
         case 1:
         drawPlantBasedOnAge(mm, dd,xPos);
+        xPos=xPos+canvas.width/10;
         break;
 
         // x location of plant is based on count
         case 2:
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
         drawPlantBasedOnAge(mm, dd,xPos);
+        xPos=xPos+canvas.width/10;
         break;
 
         case 3:
-        case 4:
+
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
         drawPlantBasedOnAge(mm, dd,xPos);
+        xPos=xPos+canvas.width/10;
         break;
+        case 4:break;
 
 
         case 5:
-        case 6:
-        case 7:
+
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
         drawPlantBasedOnAge(mm, dd, xPos);
-
+        xPos=xPos+canvas.width/10;
         break;
 
+        case 6:break;
+        case 7:break;
         case 8:
+
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
@@ -315,13 +324,16 @@
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
         drawPlantBasedOnAge(mm, dd, xPos);
-
-        // break;
-        // case 9:
-        // case 10:
-        // case 11:
-        // case 12:
-        // case 13:
+        xPos=xPos+canvas.width/10;
+        break;
+        case 9:break;
+        case 10:break;
+        case 11:break;
+        case 12:break;
+        case 13:
+        drawPlantBasedOnAge(mm, dd, xPos);
+        xPos=xPos+canvas.width/10;
+        break;
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
         // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
