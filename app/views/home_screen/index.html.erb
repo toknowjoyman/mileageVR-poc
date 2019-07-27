@@ -15,7 +15,7 @@
   <!-- GAME DISPLAY  -->
   <div id="gameDisplay" style="overflow: hidden">
     <!-- change width to px for scrollableGame -->
-    <canvas id="scrollableGame" width="3840px"></canvas>
+    <canvas id="scrollableGame" ></canvas>
   </div>
   <!--
   <h1>VegRising POC</h1>
@@ -48,7 +48,7 @@
 </div>
 
 <!-- DASHBOARD -->
-<p>Succesful Meals Ratio:</p>
+<p>Succesful Meals Ratio</p>
 <p>Carbon Emissions Saved:</p>
 <p>Community Impact:</p>
 
@@ -95,6 +95,7 @@
     display.width = window.innerWidth;
     display.height = window.innerHeight/3;
 
+    canvas.width = window.innerWidth;//remove to enable sidescroll
     canvas.height = window.innerHeight/3;
 
     drawScene();
