@@ -12,17 +12,21 @@
 <body>
 
   <!-- GAME DISPLAY  -->
-  <div id="gameDisplay" > <!--style="overflow: hidden"-->
+  <!-- <div id="gameDisplay" > style="overflow: hidden"-->
 
     <canvas id="scrollableGame" height="window.innerheight" width="window.innerWidth"></canvas> <!-- width="3840px" -->
 
-  </div>
+  <!-- </div> -->
   <!--
   <h1>VegRising POC</h1>
 -->
 <!-- <%= link_to "Sign up now!", signup_path, class: "btn btn-default btn-lg" %> -->
 
 
+<!-- DASHBOARD -->
+<p>Succesful Meals Ratio</p>
+<p>Carbon Emissions Saved:</p>
+<p>Community Impact:</p>
 
 
 <!-- <a href="#" class="btn btn-lg btn-primary">Sign up now!</a> -->
@@ -30,6 +34,7 @@
 <!-- Features -->
 
 <input type="search" class="form-control" placeholder="Find Restaurants">
+<p></p>
 <div class="btn-group">
 
 
@@ -49,10 +54,6 @@
 
 </div>
 
-<!-- DASHBOARD -->
-<p>Succesful Meals Ratio</p>
-<p>Carbon Emissions Saved:</p>
-<p>Community Impact:</p>
 
 
 <script>
@@ -66,27 +67,27 @@
   var marginLeft = 0;
 
 
-  canvas.addEventListener('mousedown', function(e) {
-    var evt = e || event;
-    dragging = true;
-    lastX = evt.clientX;
-    e.preventDefault();
-  }, false);
-
-  window.addEventListener('mousemove', function(e) {
-    var evt = e || event;
-    if (dragging) {
-      var delta = evt.clientX - lastX;
-      lastX = evt.clientX;
-      marginLeft += delta;
-      canvas.style.marginLeft = marginLeft + "px";
-    }
-    e.preventDefault();
-  }, false);
-
-  window.addEventListener('mouseup', function() {
-    dragging = false;
-  }, false);
+  // canvas.addEventListener('mousedown', function(e) {
+  //   var evt = e || event;
+  //   dragging = true;
+  //   lastX = evt.clientX;
+  //   e.preventDefault();
+  // }, false);
+  //
+  // window.addEventListener('mousemove', function(e) {
+  //   var evt = e || event;
+  //   if (dragging) {
+  //     var delta = evt.clientX - lastX;
+  //     lastX = evt.clientX;
+  //     marginLeft += delta;
+  //     canvas.style.marginLeft = marginLeft + "px";
+  //   }
+  //   e.preventDefault();
+  // }, false);
+  //
+  // window.addEventListener('mouseup', function() {
+  //   dragging = false;
+  // }, false);
 
 
 
@@ -94,8 +95,8 @@
   window.addEventListener('resize', resizeCanvas, false);
 
   function resizeCanvas() {
-    display.width = window.innerWidth;
-    display.height = window.innerHeight/3;
+    // display.width = window.innerWidth;
+    // display.height = window.innerHeight/3;
 
     canvas.width = window.innerWidth;//remove to enable sidescroll
     canvas.height = window.innerHeight/3;
