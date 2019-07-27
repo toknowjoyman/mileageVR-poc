@@ -105,43 +105,49 @@
   }
   resizeCanvas();
 
-  function drawSoil() {
-    // # topsoil
+  var verPix = canvas.height/48;
+  var horPix = canvas.width/64;
+
+
+  function drawGround(){
+
+    // # ground beneath topsoil
     context.beginPath();
-    context.rect(0, 220, canvas.width, 10);
+    context.rect(0, canvas.height - (2*canvas.height/48) , canvas.width, canvas.height/24);
     context.fillStyle = "gold";
     context.fill();
   }
 
-  function drawGround(){
-    // # ground beneath topsoil
+  function drawSoil() {
+    // # topsoil
     context.beginPath();
-    context.rect(0, 230, canvas.width, 10);
+    context.rect(0, canvas.height - (4*canvas.height/48), canvas.width, canvas.height/24);
     context.fillStyle = "gold";
     context.fill();
   }
+
   function drawGrassSingle(xPos) {
     // # single blade of grass
     context.beginPath();
-    context.rect(xPos, 215, 5, 15);
+    context.rect(xPos, canvas.height - (5*canvas.height/48), 5, 15);
     context.fillStyle = "green";
     context.fill();
   }
   function drawGrassDouble(xPos) {
     // # double blade of grass
     context.beginPath();
-    context.rect(xPos, 210, 5, 20);
+    context.rect(xPos, canvas.height - (6*canvas.height/48), 5, 20);
     context.fillStyle = "green";
     context.fill();
 
-    context.rect(xPos+5, 215, 5, 15);
+    context.rect(xPos+5, canvas.height - (5*canvas.height/48), 5, 15);
     context.fillStyle = "green";
     context.fill();
   }
   function drawSapling(xPos) {
     // sapling
     context.beginPath();
-    context.rect(xPos, 200, 5, 30);//stem
+    context.rect(xPos, canvas.height - (8*canvas.height/48), 5, 30);//stem
     context.fillStyle = "green";
     context.fill();
     context.rect(xPos-8, 205, 20, 2);//leaf
@@ -152,33 +158,39 @@
   function drawPlant(xPos) {
     // sapling
     context.beginPath();
-    context.rect(xPos, 180, 5, 50);//stem
+    context.rect(xPos, canvas.height - (10*canvas.height/48), 5, 50);//stem
     context.fillStyle = "brown";
     context.fill();
     context.beginPath();
-    context.rect(xPos-13, 205, 30, 3);//first leaves
+    context.rect(xPos-13, canvas.height - (10*canvas.height/48), (6*canvas.height/48), 3);//first leaves
     context.fillStyle = "green";
     context.fill();
-    context.rect(xPos-18, 183, 40, 5);//second leaves
+    context.rect(xPos-18, canvas.height - (6*canvas.height/48),  (8*canvas.height/48), 5);//second leaves
     context.fillStyle = "green";
     context.fill();
   }
 
   function drawTree(xPos) {
-    // sapling
+    //stem
     context.beginPath();
-    context.rect(xPos, 130, 10, 100);//stem
+    context.rect(xPos, canvas.height/2, 10, canvas.height/2);
     context.fillStyle = "brown";
     context.fill();
+
+    //first leaves
     context.beginPath();
-    context.rect(xPos-13, 150, 40, 5);//first leaves
+    context.rect(xPos-13, canvas.height/2 + 4 * canvas.height/48, 40, canvas.height/48);
     context.fillStyle = "green";
     context.fill();
-    context.rect(xPos-18, 140, 50, 7);//second leaves
+
+    //second leaves
+    context.rect(xPos-18, canvas.height/2 + canvas.height/30, 50, canvas.height/30);
     context.fillStyle = "green";
     context.fill();
+
+    //top branch
     context.beginPath();
-    context.rect(xPos-13, 130, 40, 5);//top branch
+    context.rect(xPos-13, canvas.height/2, 40, canvas.height/48);
     context.fillStyle = "green";
     context.fill();
   }
