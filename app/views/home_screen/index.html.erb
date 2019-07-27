@@ -19,33 +19,33 @@
   </div>
   <!--
   <h1>VegRising POC</h1>
-
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
 -->
+  <!-- <%= link_to "Sign up now!", signup_path, class: "btn btn-default btn-lg" %> -->
+
 
 
 <!-- DASHBOARD -->
 <p>Succesful Meals Ratio:</p>
 <p>Carbon Emissions Saved:</p>
 <p>Community Impact:</p>
-
+<!-- <a href="#" class="btn btn-lg btn-primary">Sign up now!</a> -->
 
 <!-- Features -->
-<div>
+<div class="btn-group">
   <form method="" action="meals/new">
 
-    <button id ="add meal"class="btn btn-primary" name="addEntry" value="Submit" />
+    <form method="post" action="QrCode">
+
+      <button id ="Scan QR Code"class="btn btn-dark" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="left" name="addEntry" value="Submit" />
+      Scan QR </button>
+
+    </form>
+
+    <button id ="add meal"class="btn btn-success" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="right" name="addEntry" value="Submit" />
     Track Meal </button>
 
   </form>
 
-
-  <form method="post" action="QrCode">
-
-    <button id ="Scan QR Code"class="btn btn-primary" name="addEntry" value="Submit" />
-    Scan QR </button>
-
-  </form>
 
 </div>
 
