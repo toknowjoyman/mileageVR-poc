@@ -4,12 +4,18 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
-  <!-- <script type="text/javascript" charset="utf-8">
-  // alert(gon.meals[1].created_at)
-</script> -->
+  <script type="text/javascript" charset="utf-8">
+  // alert(gon.microposts[0].content)
+  </script>
 </head>
 
 <body>
+  <% if logged_in? %>
+
+
+
+
+
 
   <!-- GAME DISPLAY  -->
   <!-- <div id="gameDisplay" > style="overflow: hidden"-->
@@ -24,9 +30,11 @@
 
 
 <!-- DASHBOARD -->
+
 <p>Succesful Meals Ratio</p>
 <p>Carbon Emissions Saved:</p>
 <p>Community Impact:</p>
+
 
 
 <!-- <a href="#" class="btn btn-lg btn-primary">Sign up now!</a> -->
@@ -34,28 +42,42 @@
 
 <!-- Features -->
 
-<input type="search" class="form-control" placeholder="Find Restaurants">
 <p></p>
-<div class="btn-group">
-
-
-  <form method="post" action="QrCode">
-
-    <button id ="Scan QR Code"class="btn btn-dark" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="left" name="addEntry" value="Submit" />
-    Scan QR </button>
-
-  </form>
-
-  <form method="get" action="/meals/new">
-    <button id ="add meal"class="btn btn-success" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="right" name="addEntry" value="Submit" />
-    Track Meal </button>
-
-  </form>
-
-
+<!-- <input type="search" class="form-control" placeholder="Find Restaurants"> -->
+<%= form_for(@micropost) do |f| %>
+<div class="field">
+  <%= f.text_field :content, placeholder: "Plant-based item..." %>
 </div>
 <p>
-<%= link_to 'List your Plant-Based Meals', meals_path %>
+  <%= f.submit "Track Meal", class: "btn btn-success", style: "border-radius:0px", align: "right" %>
+</p>
+<% end %>
+<p></p>
+
+
+<!-- <div class="btn-group">
+
+
+
+<form method="post" action="QrCode">
+
+<button id ="Scan QR Code"class="btn btn-dark" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="left" name="addEntry" value="Submit" />
+Scan QR </button>
+
+</form>
+
+
+
+<form method="get" action="/meals/new">
+<button id ="add meal"class="btn btn-success" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="right" name="addEntry" value="Submit" />
+Track Meal </button>
+
+</form>
+
+
+</div> -->
+<p>
+  <%= link_to 'List your Plant-Based Meals', meals_path %>
 </p>
 
 
@@ -270,7 +292,7 @@
 
   function plantingOnFibonacciMeals(){
     var xPos = canvas.width/10;
-    for (const [i, meal] of gon.meals.entries()) {
+    for (const [i, meal] of gon.microposts.entries()) {
       // alert(meal.created_at[5]+meal.created_at[6]+meal.created_at[8]+meal.created_at[9]);
       // for (var plants = 0; plants<=i; plants++){
       // }
@@ -412,7 +434,7 @@
     drawGround();
 
     plantingOnFibonacciMeals();
-    
+
 
     // switch (gon.count){
     //   case 1: drawGrassSingle(20);
@@ -583,6 +605,10 @@
 //   context.fill();
 // }
 // </script>
+<% else %>
+<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+<%= link_to "Login", login_path, class: "btn btn-lg btn-success" %>
+<% end %>
 
 </body>
 </html>
