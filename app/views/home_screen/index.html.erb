@@ -12,11 +12,6 @@
 <body>
   <% if logged_in? %>
 
-
-
-
-
-
   <!-- GAME DISPLAY  -->
   <!-- <div id="gameDisplay" > style="overflow: hidden"-->
 
@@ -290,136 +285,68 @@ Track Meal </button>
     }
   }
 
+  function is_fibonacci(n){
+    var phi = 0.5 + 0.5 * Math.sqrt(5.0)
+    var a = phi * n
+    return Math.abs(Math.round(a) - a) < 1.0 / n
+  }
+  // alert(is_fibonacci(13));
+
   function plantingOnFibonacciMeals(){
-    var xPos = canvas.width/10;
+    var xPos = canvas.width/10;// x location of plant is updated on count
+    var previousFibonacci = 1;//
     for (const [i, meal] of gon.microposts.entries()) {
-      // alert(meal.created_at[5]+meal.created_at[6]+meal.created_at[8]+meal.created_at[9]);
-      // for (var plants = 0; plants<=i; plants++){
-      // }
-
-      // alert
       var mealsCount = i+1;
-      // alert(mealsCount)
 
-      // getting string representation of gon var for date/time of meal
-      var mm = meal.created_at[5]+meal.created_at[6], dd = meal.created_at[8]+meal.created_at[9];
+      var mm = meal.created_at[5]+meal.created_at[6], dd = meal.created_at[8]+meal.created_at[9]; // getting string representation of gon var for date/time of meal
 
-      switch (mealsCount){
-        // if the meal is fibonacci count
-        // draw a plant
-
-        case 1:
-        drawPlantBasedOnAge(mm, dd,xPos);
+      if (is_fibonacci(mealsCount)){
+        drawPlantBasedOnAge(mm, dd, xPos)
         xPos=xPos+canvas.width/10;
-        break;
-
-        // x location of plant is based on count
-        case 2:
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        drawPlantBasedOnAge(mm, dd,xPos);
-        xPos=xPos+canvas.width/10;
-        break;
-
-        case 3:
-
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
-        drawPlantBasedOnAge(mm, dd,xPos);
-        xPos=xPos+canvas.width/10;
-        break;
-        case 4:break;
-
-
-        case 5:
-
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
-        drawPlantBasedOnAge(mm, dd, xPos);
-        xPos=xPos+canvas.width/10;
-        break;
-
-        case 6:break;
-        case 7:break;
-        case 8:
-
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 100);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
-        drawPlantBasedOnAge(mm, dd, xPos);
-        xPos=xPos+canvas.width/10;
-        break;
-        case 9:break;
-        case 10:break;
-        case 11:break;
-        case 12:break;
-        case 13:
-        drawPlantBasedOnAge(mm, dd, xPos);
-        xPos=xPos+canvas.width/10;
-        break;
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 100);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 160);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 180);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 200);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 220);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 240);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 260);
-        //
-        // break;
-        //
-        // case 21:
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 40);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 60);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 80);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 100);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 120);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 140);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 160);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 180);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 200);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 220);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 240);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 260);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 280);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 300);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-        // drawPlantBasedOnAge(meal.created_at[8]+meal.created_at[9], 20);
-
-        // break;
-        // case 34:
-        //
-        // break;
-        // case 55:
-        //
-        // break;
-        // case 89:
-        //
-        // break;
-        // case 144:
-        //
-        // break;
-        // case 192:
-        //
-        // break;
-
-
       }
+
+      // switch (mealsCount){
+      //   // if the meal is fibonacci count
+      //   // draw a plant
+      //
+      //   case 1:
+      //   drawPlantBasedOnAge(mm, dd,xPos);
+      //   xPos=xPos+canvas.width/10;
+      //   break;
+      //
+      //
+      //   case 2:
+      //
+      //   drawPlantBasedOnAge(mm, dd,xPos);
+      //   xPos=xPos+canvas.width/10;
+      //   break;
+      //
+      //   case 3:
+      //   drawPlantBasedOnAge(mm, dd,xPos);
+      //   xPos=xPos+canvas.width/10;
+      //   break;
+      //   case 4:break;
+      //   case 5:
+      //   drawPlantBasedOnAge(mm, dd, xPos);
+      //   xPos=xPos+canvas.width/10;
+      //   break;
+      //
+      //   case 6:break;
+      //   case 7:break;
+      //   case 8:
+      //   drawPlantBasedOnAge(mm, dd, xPos);
+      //   xPos=xPos+canvas.width/10;
+      //   break;
+      //   case 9:break;
+      //   case 10:break;
+      //   case 11:break;
+      //   case 12:break;
+      //   case 13:
+      //   drawPlantBasedOnAge(mm, dd, xPos);
+      //   xPos=xPos+canvas.width/10;
+      //   break;
+      //
+      // }
     }
   }
 
@@ -435,38 +362,6 @@ Track Meal </button>
 
     plantingOnFibonacciMeals();
 
-
-    // switch (gon.count){
-    //   case 1: drawGrassSingle(20);
-    //   break;
-    //   case 2: drawGrassDouble(40);
-    //   break;
-    //   case 3: drawSapling(60);
-    //   break;
-    //   case 4: drawPlant(80);
-    //   break;
-    //   case 5: drawTree(100);
-    //   break;
-    //   case 6: drawGrassSingle(20);
-    //   drawGrassDouble(50);
-    //   drawSapling(80);
-    //   drawPlant(120);
-    //   drawTree(160);
-    //   break;
-    //   case 7: drawGrassDouble(20);
-    //   drawGrassDouble(50);
-    //   drawSapling(80);
-    //   drawPlant(120);
-    //   drawTree(160);
-    //   break;
-    //   case 8: drawGrassDouble(20);
-    //   drawSapling(50);
-    //   drawPlant(80);
-    //   drawTree(120);
-    //   drawTree(160);
-    //   case 9: drawSapling(20);
-    //   break;
-    // }
   }
 
   //params to add: days, meals
@@ -605,10 +500,24 @@ Track Meal </button>
 //   context.fill();
 // }
 // </script>
+<!-- <%= link_to "Log out", logout_path, method: :delete %> -->
 <% else %>
 <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
 <%= link_to "Login", login_path, class: "btn btn-lg btn-success" %>
 <% end %>
+
+
+<%= form_tag("/search", method: "get") do %>
+<%= label_tag(:q, "Search for:") %>
+<%= text_field_tag(:q, "Restaurants by location") %>
+<%= submit_tag("Search") %>
+<% end %>
+
+<% response = Faraday.get "https://www.vegguide.org/search/by-address/94618"%>
+
+<%res = JSON.parse response.body %>
+<%= res.entries[0][1][1]['website'] %>
+
 
 </body>
 </html>

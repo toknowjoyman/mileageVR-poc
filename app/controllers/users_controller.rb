@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the αpp"
+      flash[:success] = "Thanks for signing up for the αpp"
       redirect_to home_screen_index_url
     else
       render 'new'

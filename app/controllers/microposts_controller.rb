@@ -7,8 +7,15 @@ class MicropostsController < ApplicationController
       flash[:success] = "Meal Tracked. You saved 500 Gallons of water"
       redirect_to root_url
     else
-      render 'static_pages/home'
+      flash[:danger] = "Please enter title "
+      redirect_to root_url
+
     end
+  end
+
+  def index
+    @microposts = current_user.microposts.all
+    @count = current_user.microposts.count
   end
 
   def destroy
