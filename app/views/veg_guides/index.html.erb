@@ -1,0 +1,32 @@
+<%= @test %>
+<% request = "https://www.vegguide.org/search/by-address/" + @test %>
+
+<!-- <% response = Faraday.get(request) %>
+
+<%res = JSON.parse response.body %>
+<%= res.entries[0][1][1] %> -->
+
+
+<h1>Plant-Based Restaurants</h1>
+<div>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Veg Level</th>
+  </tr>
+
+  <% res.entries[0][1].each do |entry| %>
+
+  <tr>
+    <td><%= link_to entry['name'], entry['website']%></td>
+    <td><%= entry['veg_level_description']%></td>
+  </tr>
+
+  <% end %>
+</table>
+</div>
+
+
+<!-- <% test = VegGuide.find()%>
+
+<%= test.attributes.entries[0][1][1]%> -->

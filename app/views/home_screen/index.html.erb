@@ -62,14 +62,6 @@ Scan QR </button>
 </form>
 
 
-
-<form method="get" action="/meals/new">
-<button id ="add meal"class="btn btn-success" style="border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px" align="right" name="addEntry" value="Submit" />
-Track Meal </button>
-
-</form>
-
-
 </div> -->
 <p>
   <%= link_to 'List your Plant-Based Meals', microposts_path %>
@@ -508,15 +500,13 @@ Track Meal </button>
 
 
 <%= form_tag("/search", method: "get") do %>
-<%= label_tag(:q, "Search for:") %>
-<%= text_field_tag(:q, "Restaurants by location") %>
+
+<%= text_field_tag(:query, "Restaurants by ZIP") %>
+
 <%= submit_tag("Search") %>
 <% end %>
 
-<% response = Faraday.get "https://www.vegguide.org/search/by-address/94618"%>
 
-<%res = JSON.parse response.body %>
-<%= res.entries[0][1][1]['website'] %>
 
 
 </body>

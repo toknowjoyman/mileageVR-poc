@@ -29,10 +29,18 @@ GEM
       globalid (>= 0.3.6)
     activemodel (5.2.0)
       activesupport (= 5.2.0)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (5.2.0)
       activemodel (= 5.2.0)
       activesupport (= 5.2.0)
       arel (>= 9.0)
+    activeresource (5.1.0)
+      activemodel (>= 5.0, < 7)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (>= 5.0, < 7)
     activestorage (5.2.0)
       actionpack (= 5.2.0)
       activerecord (= 5.2.0)
@@ -230,6 +238,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeresource
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)

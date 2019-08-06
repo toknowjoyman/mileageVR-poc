@@ -1,0 +1,2 @@
+module VegGuidesHelper
+end
